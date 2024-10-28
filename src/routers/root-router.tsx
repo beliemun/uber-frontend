@@ -1,19 +1,12 @@
-import { gql, useQuery } from "@apollo/client";
-import { RouterProvider } from "react-router-dom";
+import "common/tailwind/output.css";
 import privateRouter from "./private-router";
 import publicRouter from "./public-router";
-
-const IS_LOGGED_IN = gql`
-  query isLoggedIn {
-    isLoggedIn @client
-  }
-`;
+import { RouterProvider } from "react-router-dom";
+import { useUserStore } from "stores";
 
 const RootRouter = () => {
-  const {
-    data: { isLoggedIn },
-  } = useQuery(IS_LOGGED_IN);
-  return <RouterProvider router={isLoggedIn ? privateRouter : publicRouter} />;
+  const { isSignedIn } = useUserStore();
+  return <RouterProvider router={isSignedIn ? privateRouter : publicRouter} />;
 };
 
 export default RootRouter;

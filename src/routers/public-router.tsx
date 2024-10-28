@@ -1,10 +1,19 @@
+import { CreateAccountPage, NotFoundPage, RootPage, SignInPage } from "pages/public";
 import { createBrowserRouter } from "react-router-dom";
-import { Home } from "../screens/public";
 
 const publicRouter = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <RootPage />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/create-account",
+    element: <CreateAccountPage />,
+  },
+  {
+    path: "/sign-in",
+    element: <SignInPage />,
   },
 ]);
 

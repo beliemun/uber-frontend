@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home } from "../screens/private";
+import { Home } from "pages/private";
 
 const privateRouter = createBrowserRouter([
   {
