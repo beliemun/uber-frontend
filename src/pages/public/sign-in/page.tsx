@@ -12,7 +12,7 @@ const SignInPage = () => {
   } = useForm();
 
   const onSubmit = (data: any) => {
-    console.log(data); // 폼 데이터 확인
+    console.log(data);
   };
 
   return (
