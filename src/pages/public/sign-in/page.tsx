@@ -1,9 +1,10 @@
-import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
+import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Card } from "antd";
-import { Button, Input, Text, Title } from "components/atoms";
+import { Button, Input, Title } from "components/atoms";
 import { Form, FormItem } from "components/molecules";
 
 import { Controller, useForm } from "react-hook-form";
+import { useAlertStore } from "stores/useAlertStore";
 
 interface SignInFormData {
   email: string;
@@ -16,9 +17,14 @@ const SignInPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<SignInFormData>();
+  const { show } = useAlertStore();
 
   const onSubmit = (data: SignInFormData) => {
     console.log(data);
+    show({
+      title: "Hello",
+      message: "Hello world!",
+    });
   };
 
   return (
