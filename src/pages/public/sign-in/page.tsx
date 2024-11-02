@@ -1,17 +1,23 @@
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
-import { Card, Form } from "antd";
-import { Button, Input, Title } from "components/atoms";
+import { Card } from "antd";
+import { Button, Input, Text, Title } from "components/atoms";
+import { Form, FormItem } from "components/molecules";
 
 import { Controller, useForm } from "react-hook-form";
+
+interface SignInFormData {
+  email: string;
+  password: string;
+}
 
 const SignInPage = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<SignInFormData>();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: SignInFormData) => {
     console.log(data);
   };
 
@@ -19,16 +25,11 @@ const SignInPage = () => {
     <article className="flex flex-col justify-center items-center w-full h-screen">
       <Card>
         <Title className="w-full text-center pb-2">Sign In</Title>
-        <Form onFinish={handleSubmit(onSubmit)}>
-          <Form.Item
-            label="Email"
-            validateStatus={errors.email ? "error" : ""}
-            help={errors.email ? "This field is required." : ""}
-          >
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <FormItem label="Email" required>
             <Controller
               name="email"
               control={control}
-              defaultValue=""
               rules={{
                 required: "This field is required.",
                 pattern: {
@@ -44,21 +45,21 @@ const SignInPage = () => {
                   addonBefore={<MailOutlined />}
                   placeholder="여기에 이메일을 입력"
                   autoComplete="email"
+                  error={errors.email?.message}
+                  status={errors.email?.message ? "error" : undefined}
                 />
               )}
             />
-          </Form.Item>
+          </FormItem>
 
-          <Form.Item
-            label="Password"
-            validateStatus={errors.password ? "error" : ""}
-            help={errors.password ? "This field is required." : ""}
-          >
+          <FormItem label="Password" required>
             <Controller
               name="password"
               control={control}
-              defaultValue=""
-              rules={{ required: "This field is required." }}
+              rules={{
+                required: "This field is required.",
+                minLength: { message: "It should be longer than 4 characters.", value: 4 },
+              }}
               render={({ field }) => (
                 <Input.Password
                   {...field}
@@ -66,10 +67,12 @@ const SignInPage = () => {
                   addonBefore={<LockOutlined />}
                   placeholder="여기에 비밀번호 입력"
                   autoComplete="password"
+                  error={errors.password?.message}
+                  status={errors.password?.message ? "error" : undefined}
                 />
               )}
             />
-          </Form.Item>
+          </FormItem>
 
           <Button onClick={handleSubmit(onSubmit)} className="w-full">
             Sign In

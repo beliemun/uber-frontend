@@ -7,10 +7,10 @@ import Password, { PasswordProps } from "./password";
 import TextArea, { TextAreaProps } from "./textarea";
 import OTP, { OTPProps } from "./opt";
 import { OTPRef } from "antd/es/input/OTP";
-import { Text } from "components/atoms"
+import { Text } from "components/atoms";
 
 export interface InputProps extends InputAntdProps {
-  errors?: string[] | undefined;
+  error?: string | undefined;
 }
 
 export interface InputComponentProps
@@ -22,18 +22,23 @@ export interface InputComponentProps
 }
 
 const Input = (
-  { style, className, errors, autoComplete, ...rest }: InputProps,
+  { style, className, error, autoComplete, ...rest }: InputProps,
   ref: ForwardedRef<InputRef>
 ) => {
   return (
     <ConfigProvider>
-      <InputAntd ref={ref} style={{ ...style }} className={cn(className)} {...rest} />
+      <InputAntd
+        ref={ref}
+        style={{ ...style }}
+        className={cn(className)}
+        {...rest}
+      />
       <div className="flex flex-col space-y-1 mt-1 ml-1">
-        {errors?.map((error, index) => (
-          <Text type="sm-regular" color="red" key={index}>
+        {error ? (
+          <Text type="sm-regular" color="red">
             {"• " + error}
           </Text>
-        ))}
+        ) : null}
       </div>
     </ConfigProvider>
   );
