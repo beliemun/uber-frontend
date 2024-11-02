@@ -13,14 +13,22 @@ const SignInPage = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    setError,
   } = useForm<SignInInput>();
   const [_, signInMutation] = useMutation<SignInMutation, SignInMutationVariables>(SignInDocument);
 
   const onSubmit = async (input: SignInInput) => {
     try {
-      const { data, error } = await signInMutation({ input });
-      console.log("data:", data);
-      console.log("error:", error);
+      const { data } = await signInMutation({ input });
+      const {
+        signIn: { ok, error, token },
+      } = data as SignInMutation;
+      if (error) {
+        setError("email", { message: error });
+      }
+      if (ok) {
+        console.log("token:", token);
+      }
     } catch (e) {}
   };
 
