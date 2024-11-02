@@ -2,30 +2,32 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Card } from "antd";
 import { Button, Input, Title } from "components/atoms";
 import { Form, FormItem } from "components/molecules";
-
+import { SignInDocument, SignInInput, SignInMutation, SignInMutationVariables } from "gql/graphql";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useAlertStore } from "stores/useAlertStore";
-
-interface SignInFormData {
-  email: string;
-  password: string;
-}
+import { useMutation } from "urql";
 
 const SignInPage = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInFormData>();
-  const { show } = useAlertStore();
+    setValue,
+  } = useForm<SignInInput>();
+  const [_, signInMutation] = useMutation<SignInMutation, SignInMutationVariables>(SignInDocument);
 
-  const onSubmit = (data: SignInFormData) => {
-    console.log(data);
-    show({
-      title: "Hello",
-      message: "Hello world!",
-    });
+  const onSubmit = async (input: SignInInput) => {
+    try {
+      const { data, error } = await signInMutation({ input });
+      console.log("data:", data);
+      console.log("error:", error);
+    } catch (e) {}
   };
+
+  useEffect(() => {
+    setValue("email", "test1@test.com");
+    setValue("password", "1234");
+  }, []);
 
   return (
     <article className="flex flex-col justify-center items-center w-full h-screen">
@@ -57,7 +59,6 @@ const SignInPage = () => {
               )}
             />
           </FormItem>
-
           <FormItem label="Password" required>
             <Controller
               name="password"
@@ -79,8 +80,7 @@ const SignInPage = () => {
               )}
             />
           </FormItem>
-
-          <Button onClick={handleSubmit(onSubmit)} className="w-full">
+          <Button onClick={handleSubmit(onSubmit)} className="w-full" fullWidth>
             Sign In
           </Button>
         </Form>
