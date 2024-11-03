@@ -1,5 +1,3 @@
-"use client";
-
 import { Text, Title } from "components/atoms";
 import { cn } from "lib/utils";
 import { CSSProperties, DetailedHTMLProps, FormHTMLAttributes } from "react";

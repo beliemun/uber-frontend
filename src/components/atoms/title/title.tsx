@@ -1,5 +1,3 @@
-"use client";
-
 import { CSSProperties, ReactNode, useEffect, useState } from "react";
 import { TitleColor, TitleStyle, TitleType } from "./types";
 import { cn } from "lib/utils";

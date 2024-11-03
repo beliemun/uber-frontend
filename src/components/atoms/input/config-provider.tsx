@@ -1,5 +1,3 @@
-"use client";
-
 import { useDarkModeStore } from "stores/useDarkModeStore";
 import { colors } from "lib/colors";
 import { hexToRGBA } from "lib/utils";

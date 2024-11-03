@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { Button, Text, Title } from "components/atoms";
 import { useAlertStore } from "stores/useAlertStore";

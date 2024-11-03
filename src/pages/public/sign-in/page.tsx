@@ -1,9 +1,7 @@
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import { Card } from "antd";
-import { Button, Input, Title } from "components/atoms";
+import { Button, Card, Input, Title } from "components/atoms";
 import { Form, FormItem } from "components/molecules";
 import { SignInDocument, SignInInput, SignInMutation, SignInMutationVariables } from "gql/graphql";
-import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useMutation } from "urql";
 
@@ -12,12 +10,16 @@ const SignInPage = () => {
     control,
     handleSubmit,
     formState: { errors },
-    setValue,
     setError,
   } = useForm<SignInInput>();
-  const [_, signInMutation] = useMutation<SignInMutation, SignInMutationVariables>(SignInDocument);
+  const [{ fetching }, signInMutation] = useMutation<SignInMutation, SignInMutationVariables>(
+    SignInDocument
+  );
 
   const onSubmit = async (input: SignInInput) => {
+    if (fetching) {
+      return;
+    }
     try {
       const { data } = await signInMutation({ input });
       const {
@@ -32,11 +34,6 @@ const SignInPage = () => {
     } catch (e) {}
   };
 
-  useEffect(() => {
-    setValue("email", "test1@test.com");
-    setValue("password", "1234");
-  }, []);
-
   return (
     <article className="flex flex-col justify-center items-center w-full h-screen">
       <Card>
@@ -45,6 +42,7 @@ const SignInPage = () => {
           <FormItem label="Email" required>
             <Controller
               name="email"
+              defaultValue="test1@test.com"
               control={control}
               rules={{
                 required: "This field is required.",
@@ -70,6 +68,7 @@ const SignInPage = () => {
           <FormItem label="Password" required>
             <Controller
               name="password"
+              defaultValue="1234"
               control={control}
               rules={{
                 required: "This field is required.",
@@ -88,7 +87,7 @@ const SignInPage = () => {
               )}
             />
           </FormItem>
-          <Button onClick={handleSubmit(onSubmit)} className="w-full" fullWidth>
+          <Button type="submit" className="w-full" fullWidth loading={fetching}>
             Sign In
           </Button>
         </Form>

@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
+    "mutation createAccount($input: CreateAccountInput!) {\n  createAccount(input: $input) {\n    ok\n    error\n  }\n}": types.CreateAccountDocument,
     "mutation signIn($input: SignInInput!) {\n  signIn(input: $input) {\n    ok\n    token\n    error\n  }\n}": types.SignInDocument,
 };
 
@@ -31,6 +32,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation createAccount($input: CreateAccountInput!) {\n  createAccount(input: $input) {\n    ok\n    error\n  }\n}"): (typeof documents)["mutation createAccount($input: CreateAccountInput!) {\n  createAccount(input: $input) {\n    ok\n    error\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

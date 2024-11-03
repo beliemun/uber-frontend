@@ -27,12 +27,7 @@ const Input = (
 ) => {
   return (
     <ConfigProvider>
-      <InputAntd
-        ref={ref}
-        style={{ ...style }}
-        className={cn(className)}
-        {...rest}
-      />
+      <InputAntd ref={ref} style={{ ...style }} className={cn(className)} {...rest} />
       <div className="flex flex-col space-y-1 mt-1 ml-1">
         {error ? (
           <Text type="sm-regular" color="red">
