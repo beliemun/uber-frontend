@@ -20,7 +20,6 @@ const CreateAccountPage = () => {
     control,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<CreateAccountInput>();
   const [{ fetching }, createAccountMutation] = useMutation<
     CreateAccountMutation,

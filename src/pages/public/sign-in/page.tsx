@@ -1,11 +1,13 @@
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import { Button, Card, Input, Title } from "components/atoms";
+import { Button, Card, Input, Message, Title } from "components/atoms";
 import { Form, FormItem } from "components/molecules";
 import { SignInDocument, SignInInput, SignInMutation, SignInMutationVariables } from "gql/graphql";
 import { Controller, useForm } from "react-hook-form";
 import { useMutation } from "urql";
 
 const SignInPage = () => {
+  const [messageApi, contextHolder] = Message.useMessage();
+
   const {
     control,
     handleSubmit,
@@ -26,7 +28,7 @@ const SignInPage = () => {
         signIn: { ok, error, token },
       } = data as SignInMutation;
       if (error) {
-        setError("email", { message: error });
+        messageApi.open({ type: "error", content: error });
       }
       if (ok) {
         console.log("token:", token);
@@ -36,6 +38,7 @@ const SignInPage = () => {
 
   return (
     <article className="flex flex-col justify-center items-center w-full h-screen">
+      {contextHolder}
       <Card>
         <Title className="w-full text-center pb-2">Sign In</Title>
         <Form onSubmit={handleSubmit(onSubmit)}>
