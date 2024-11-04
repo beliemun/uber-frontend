@@ -49,7 +49,7 @@ const SignInPage = () => {
   };
 
   useEffect(() => {
-    console.log("useEffect:", accessToken);
+    console.log("accessToken:", accessToken);
   }, [accessToken]);
 
   return (
