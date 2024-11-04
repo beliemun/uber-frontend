@@ -2,18 +2,29 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Card, Input, Message, Title } from "components/atoms";
 import { Form, FormItem } from "components/molecules";
 import { SignInDocument, SignInInput, SignInMutation, SignInMutationVariables } from "gql/graphql";
+import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useUserStore } from "stores";
 import { useMutation } from "urql";
 
 const SignInPage = () => {
   const [messageApi, contextHolder] = Message.useMessage();
+  const { signIn, accessToken, setAccessToken } = useUserStore();
+  const navigate = useNavigate();
 
   const {
     control,
     handleSubmit,
-    formState: { errors },
-    setError,
-  } = useForm<SignInInput>();
+    formState: { errors, isValid },
+  } = useForm<SignInInput>({
+    mode: "onChange",
+    defaultValues: {
+      email: "test1@test.com",
+      password: "1234",
+    },
+  });
   const [{ fetching }, signInMutation] = useMutation<SignInMutation, SignInMutationVariables>(
     SignInDocument
   );
@@ -30,22 +41,29 @@ const SignInPage = () => {
       if (error) {
         messageApi.open({ type: "error", content: error });
       }
-      if (ok) {
-        console.log("token:", token);
+      if (ok && token) {
+        console.log(ok, token);
+        setAccessToken(token);
       }
     } catch (e) {}
   };
 
+  useEffect(() => {
+    console.log("useEffect:", accessToken);
+  }, [accessToken]);
+
   return (
     <article className="flex flex-col justify-center items-center w-full h-screen">
       {contextHolder}
+      <Helmet>
+        <title>Sign In</title>
+      </Helmet>
       <Card>
         <Title className="w-full text-center pb-2">Sign In</Title>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FormItem label="Email" required>
             <Controller
               name="email"
-              defaultValue="test1@test.com"
               control={control}
               rules={{
                 required: "This field is required.",
@@ -71,7 +89,6 @@ const SignInPage = () => {
           <FormItem label="Password" required>
             <Controller
               name="password"
-              defaultValue="1234"
               control={control}
               rules={{
                 required: "This field is required.",
@@ -90,7 +107,16 @@ const SignInPage = () => {
               )}
             />
           </FormItem>
-          <Button type="submit" className="w-full" fullWidth loading={fetching}>
+          <Button
+            type="submit"
+            className="w-full"
+            fullWidth
+            loading={fetching}
+            disabled={!isValid}
+            onClick={() => {
+              signIn("1234");
+            }}
+          >
             Sign In
           </Button>
         </Form>

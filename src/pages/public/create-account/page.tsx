@@ -12,6 +12,7 @@ import { cn } from "lib/utils";
 import { Controller, useForm } from "react-hook-form";
 import { useMutation } from "urql";
 import { roleOptions } from "./data";
+import { Helmet } from "react-helmet-async";
 
 const CreateAccountPage = () => {
   const [messageApi, contextHolder] = Message.useMessage();
@@ -19,8 +20,16 @@ const CreateAccountPage = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
-  } = useForm<CreateAccountInput>();
+    formState: { errors, isValid },
+  } = useForm<CreateAccountInput>({
+    mode: "onChange",
+    defaultValues: {
+      email: "test1@test.com",
+      name: "test1",
+      password: "1234",
+      role: UserRole.Client,
+    },
+  });
   const [{ fetching }, createAccountMutation] = useMutation<
     CreateAccountMutation,
     CreateAccountMutationVariables
@@ -47,13 +56,15 @@ const CreateAccountPage = () => {
   return (
     <article className="flex flex-col justify-center items-center w-full h-screen">
       {contextHolder}
+      <Helmet>
+        <title>Create Account</title>
+      </Helmet>
       <Card>
         <Title className="w-full text-center pb-2">Create Account</Title>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FormItem label="email" required>
             <Controller
               name="email"
-              defaultValue="test1@test.com"
               control={control}
               rules={{
                 required: "This field is required.",
@@ -79,7 +90,6 @@ const CreateAccountPage = () => {
           <FormItem label="name" required>
             <Controller
               name="name"
-              defaultValue="test1"
               control={control}
               rules={{
                 required: "This field is required.",
@@ -100,7 +110,6 @@ const CreateAccountPage = () => {
           <FormItem label="Password" required>
             <Controller
               name="password"
-              defaultValue="1234"
               control={control}
               rules={{
                 required: "This field is required.",
@@ -123,7 +132,6 @@ const CreateAccountPage = () => {
             <Controller
               name="role"
               control={control}
-              defaultValue={UserRole.Client}
               rules={{ required: "This field is required." }}
               render={({ field }) => (
                 <Radio.Group
@@ -134,7 +142,7 @@ const CreateAccountPage = () => {
               )}
             />
           </FormItem>
-          <Button type="submit" className="w-full" fullWidth loading={fetching}>
+          <Button type="submit" className="w-full" fullWidth loading={fetching} disabled={!isValid}>
             Create Account
           </Button>
         </Form>

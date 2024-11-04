@@ -7,6 +7,7 @@ import { Alert } from "components/molecules";
 
 const RootRouter = () => {
   const { isSignedIn } = useUserStore();
+
   return (
     <>
       <RouterProvider router={isSignedIn ? privateRouter : publicRouter} />
