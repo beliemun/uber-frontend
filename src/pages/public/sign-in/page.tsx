@@ -25,6 +25,7 @@ const SignInPage = () => {
       password: "1234",
     },
   });
+
   const [{ fetching }, signInMutation] = useMutation<SignInMutation, SignInMutationVariables>(
     SignInDocument
   );
@@ -42,15 +43,13 @@ const SignInPage = () => {
         messageApi.open({ type: "error", content: error });
       }
       if (ok && token) {
-        console.log(ok, token);
         setAccessToken(token);
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       }
     } catch (e) {}
   };
-
-  useEffect(() => {
-    console.log("accessToken:", accessToken);
-  }, [accessToken]);
 
   return (
     <article className="flex flex-col justify-center items-center w-full h-screen">
