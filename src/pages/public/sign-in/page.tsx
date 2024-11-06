@@ -2,7 +2,6 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Card, Input, Message, Title } from "components/atoms";
 import { Form, FormItem } from "components/molecules";
 import { SignInDocument, SignInInput, SignInMutation, SignInMutationVariables } from "gql/graphql";
-import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -26,9 +25,7 @@ const SignInPage = () => {
     },
   });
 
-  const [{ fetching }, signInMutation] = useMutation<SignInMutation, SignInMutationVariables>(
-    SignInDocument
-  );
+  const [{ fetching }, signInMutation] = useMutation<SignInMutation, SignInMutationVariables>(SignInDocument);
 
   const onSubmit = async (input: SignInInput) => {
     if (fetching) {
