@@ -2,16 +2,20 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Card, Input, Message, Title } from "components/atoms";
 import { Form, FormItem } from "components/molecules";
 import { SignInDocument, SignInInput, SignInMutation, SignInMutationVariables } from "gql/graphql";
+import { useRefreshToken } from "hooks";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useUserStore } from "stores";
 import { useMutation } from "urql";
 
 const SignInPage = () => {
   const [messageApi, contextHolder] = Message.useMessage();
-  const { signIn, accessToken, setAccessToken } = useUserStore();
+  const { signIn } = useUserStore();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { setRefreshToken } = useRefreshToken();
 
   const {
     control,
@@ -20,8 +24,7 @@ const SignInPage = () => {
   } = useForm<SignInInput>({
     mode: "onChange",
     defaultValues: {
-      email: "test1@test.com",
-      password: "1234",
+      email: location.state?.email ?? "",
     },
   });
 
@@ -34,19 +37,32 @@ const SignInPage = () => {
     try {
       const { data } = await signInMutation({ input });
       const {
-        signIn: { ok, error, token },
+        signIn: { ok, error, accessToken, refreshToken },
       } = data as SignInMutation;
       if (error) {
         messageApi.open({ type: "error", content: error });
       }
-      if (ok && token) {
-        setAccessToken(token);
+      if (ok && accessToken && refreshToken) {
         setTimeout(() => {
+          signIn(accessToken);
+          setRefreshToken(refreshToken);
           navigate("/");
-        }, 1000);
+        }, 500);
       }
     } catch (e) {}
   };
+
+  const handleNavigate = () => navigate("/create-account");
+
+  useEffect(() => {
+    if (location.state?.email) {
+      messageApi.open({
+        type: "success",
+        content: `Created Account successfully, Please sign in by '${location.state?.email}'.`,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <article className="flex flex-col justify-center items-center w-full h-screen">
@@ -109,14 +125,15 @@ const SignInPage = () => {
             fullWidth
             loading={fetching}
             disabled={!isValid}
-            onClick={() => {
-              signIn("1234");
-            }}
+            onClick={handleSubmit(onSubmit)}
           >
             Sign In
           </Button>
         </Form>
       </Card>
+      <Button buttonStyle="ghost" className="mt-4" onClick={handleNavigate}>
+        Create Account
+      </Button>
     </article>
   );
 };

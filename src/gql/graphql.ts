@@ -303,6 +303,7 @@ export type Mutation = {
   editOrder: EditOrderOutput;
   editProfile: EditProfileOutput;
   editRestaurant: EditRestaurantOutput;
+  requestRefreshToken: RequestRefreshTokenOutput;
   signIn: SignInOutput;
   takeOrder: TakeOrderOutput;
   verifyEmail: VerifyEmailOutput;
@@ -361,6 +362,11 @@ export type MutationEditProfileArgs = {
 
 export type MutationEditRestaurantArgs = {
   input: EditRestaurantInput;
+};
+
+
+export type MutationRequestRefreshTokenArgs = {
+  input: RequestRefreshTokenInput;
 };
 
 
@@ -480,6 +486,18 @@ export type QueryUserProfileArgs = {
   input: GetUserProfileInput;
 };
 
+export type RequestRefreshTokenInput = {
+  refreshToken: Scalars['String']['input'];
+};
+
+export type RequestRefreshTokenOutput = {
+  __typename?: 'RequestRefreshTokenOutput';
+  accessToken?: Maybe<Scalars['String']['output']>;
+  error?: Maybe<Scalars['String']['output']>;
+  ok: Scalars['Boolean']['output'];
+  refreshToken?: Maybe<Scalars['String']['output']>;
+};
+
 export type Restaurant = {
   __typename?: 'Restaurant';
   address?: Maybe<Scalars['String']['output']>;
@@ -519,9 +537,10 @@ export type SignInInput = {
 
 export type SignInOutput = {
   __typename?: 'SignInOutput';
+  accessToken?: Maybe<Scalars['String']['output']>;
   error?: Maybe<Scalars['String']['output']>;
   ok: Scalars['Boolean']['output'];
-  token?: Maybe<Scalars['String']['output']>;
+  refreshToken?: Maybe<Scalars['String']['output']>;
 };
 
 export type Subscription = {
@@ -589,13 +608,21 @@ export type CreateAccountMutationVariables = Exact<{
 
 export type CreateAccountMutation = { __typename?: 'Mutation', createAccount: { __typename?: 'CreateAccountOutput', ok: boolean, error?: string | null } };
 
+export type RequestRefreshTokenMutationVariables = Exact<{
+  input: RequestRefreshTokenInput;
+}>;
+
+
+export type RequestRefreshTokenMutation = { __typename?: 'Mutation', requestRefreshToken: { __typename?: 'RequestRefreshTokenOutput', ok: boolean, error?: string | null, accessToken?: string | null, refreshToken?: string | null } };
+
 export type SignInMutationVariables = Exact<{
   input: SignInInput;
 }>;
 
 
-export type SignInMutation = { __typename?: 'Mutation', signIn: { __typename?: 'SignInOutput', ok: boolean, token?: string | null, error?: string | null } };
+export type SignInMutation = { __typename?: 'Mutation', signIn: { __typename?: 'SignInOutput', ok: boolean, error?: string | null, accessToken?: string | null, refreshToken?: string | null } };
 
 
 export const CreateAccountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createAccount"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateAccountInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createAccount"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ok"}},{"kind":"Field","name":{"kind":"Name","value":"error"}}]}}]}}]} as unknown as DocumentNode<CreateAccountMutation, CreateAccountMutationVariables>;
-export const SignInDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"signIn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignInInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signIn"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ok"}},{"kind":"Field","name":{"kind":"Name","value":"token"}},{"kind":"Field","name":{"kind":"Name","value":"error"}}]}}]}}]} as unknown as DocumentNode<SignInMutation, SignInMutationVariables>;
+export const RequestRefreshTokenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"requestRefreshToken"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RequestRefreshTokenInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"requestRefreshToken"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ok"}},{"kind":"Field","name":{"kind":"Name","value":"error"}},{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"refreshToken"}}]}}]}}]} as unknown as DocumentNode<RequestRefreshTokenMutation, RequestRefreshTokenMutationVariables>;
+export const SignInDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"signIn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignInInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signIn"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ok"}},{"kind":"Field","name":{"kind":"Name","value":"error"}},{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"refreshToken"}}]}}]}}]} as unknown as DocumentNode<SignInMutation, SignInMutationVariables>;

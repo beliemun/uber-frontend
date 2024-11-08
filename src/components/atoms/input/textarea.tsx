@@ -1,4 +1,4 @@
-import { cn } from "lib/utils";
+import { cn } from "common/utils";
 import { InputRef } from "antd";
 import TextAreaAntd, { TextAreaProps as TextAreaAtndProps } from "antd/es/input/TextArea";
 import { ForwardedRef, forwardRef } from "react";

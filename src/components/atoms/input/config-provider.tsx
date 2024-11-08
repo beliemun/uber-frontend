@@ -1,6 +1,6 @@
 import { useDarkModeStore } from "stores/useDarkModeStore";
-import { colors } from "lib/colors";
-import { hexToRGBA } from "lib/utils";
+import { colors } from "common/colors";
+import { hexToRGBA } from "common/utils";
 import { ConfigProvider as ConfigProviderAntd } from "antd";
 import { ReactNode } from "react";
 

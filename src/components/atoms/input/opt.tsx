@@ -1,8 +1,8 @@
-import { cn } from "lib/utils";
+import { cn } from "common/utils";
 import OTPAntd, { OTPProps as OTPAntdProps, OTPRef } from "antd/es/input/OTP";
 import { ForwardedRef, forwardRef } from "react";
 import { ConfigProvider } from "./config-provider";
-import { Text } from "components/atoms"
+import { Text } from "components/atoms";
 
 export interface OTPProps extends OTPAntdProps {
   errors?: string[] | undefined;

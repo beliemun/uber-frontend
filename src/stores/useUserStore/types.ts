@@ -6,5 +6,4 @@ export interface UserProps {
 export interface UserStore extends UserProps {
   signIn: (accessToken: string) => void;
   signOut: () => void;
-  setAccessToken: (accessToken: string) => void;
 }

@@ -1,7 +1,7 @@
 import { CSSProperties, forwardRef, LegacyRef, ReactNode, useEffect, useState } from "react";
 import { TextColor, TextStyle, TextType } from "./types";
-import { cn } from "lib/utils";
-import { ColorType } from "lib/colors";
+import { cn } from "common/utils";
+import { ColorType } from "common/colors";
 import { theme } from "antd";
 import { textColorStyles } from "./styles";
 

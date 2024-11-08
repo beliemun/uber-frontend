@@ -3,10 +3,9 @@ import { Tooltip, Text } from "components/atoms";
 import { TooltipPlacement } from "components/atoms/tooltip/types";
 import { TextType } from "components/atoms/text/types";
 import { QuestionCircleOutlined } from "@ant-design/icons";
-import { cn } from "lib/utils";
+import { cn } from "common/utils";
 
-interface FormItemProps
-  extends DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> {
+interface FormItemProps extends DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> {
   style?: CSSProperties;
   className?: string;
   label: string;
@@ -43,11 +42,7 @@ export const FormItem = ({
       style={{ ...style, maxWidth }}
       className={cn("flex gap-2", direction === "horizontal" ? "flex-row" : "flex-col", className)}
     >
-      <label
-        style={{ width: labelWidth }}
-        className={cn("flex w-full items-center gap-1 shrink-0")}
-        {...rest}
-      >
+      <label style={{ width: labelWidth }} className={cn("flex w-full items-center gap-1 shrink-0")} {...rest}>
         <Text type={labelType} className="overflow-label" color="description">
           {label}
         </Text>

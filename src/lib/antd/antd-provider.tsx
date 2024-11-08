@@ -1,5 +1,5 @@
 import { useDarkModeStore } from "stores/useDarkModeStore";
-import { colors } from "lib/colors";
+import { colors } from "common/colors";
 import { ConfigProvider, theme } from "antd";
 import { ReactNode } from "react";
 

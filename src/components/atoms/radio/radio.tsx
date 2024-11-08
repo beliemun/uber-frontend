@@ -1,4 +1,4 @@
-import { cn } from "lib/utils";
+import { cn } from "common/utils";
 import { CheckboxOptionType, Radio as RadioAntd, RadioProps as RadioAntdProps } from "antd";
 import "./styles.css";
 
@@ -10,8 +10,7 @@ export interface RadioProps extends RadioAntdProps {}
 
 export type RadioOption = string | number | CheckboxOptionType<any>;
 
-export interface RadioComponentProps
-  extends ForwardRefExoticComponent<RadioProps & RefAttributes<RadioRef>> {
+export interface RadioComponentProps extends ForwardRefExoticComponent<RadioProps & RefAttributes<RadioRef>> {
   Group: ForwardRefExoticComponent<RadioGroupProps & RefAttributes<HTMLDivElement>>;
 }
 

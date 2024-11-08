@@ -2,17 +2,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { AnimateProps } from "./types";
 import { animations } from "./animations";
 import { useEffect, useState } from "react";
-import { cn } from "lib/utils";
+import { cn } from "common/utils";
 
-const Animate = ({
-  style,
-  className,
-  name,
-  type = "show-up",
-  layoutId,
-  transition,
-  children,
-}: AnimateProps) => {
+const Animate = ({ style, className, name, type = "show-up", layoutId, transition, children }: AnimateProps) => {
   const [isMount, setIsMount] = useState(false);
 
   useEffect(() => setIsMount(true), []);

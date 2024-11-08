@@ -1,0 +1,8 @@
+mutation requestRefreshToken($input: RequestRefreshTokenInput!) {
+  requestRefreshToken(input: $input) {
+    ok
+    error
+    accessToken
+    refreshToken
+  }
+}

@@ -1,6 +1,6 @@
-import { cn } from "lib/utils";
+import { cn } from "common/utils";
 import { ButtonProps, ButtonStyleType } from "./types";
-import { ColorType } from "lib/colors";
+import { ColorType } from "common/colors";
 
 export const buttonStyles = ({
   buttonRound,
@@ -16,14 +16,7 @@ export const buttonStyles = ({
   // Button Color
   if (buttonColor === "primary") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn(
-          "text-white bg-primary-500",
-          "active:bg-primary-600",
-          "hover:bg-primary-400",
-          "dark:text-black"
-        )
-      );
+      styles.push(cn("text-white bg-primary-500", "active:bg-primary-600", "hover:bg-primary-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -53,14 +46,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "slate") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn(
-          "text-white bg-slate-500",
-          "active:bg-slate-600",
-          "hover:bg-slate-400",
-          "dark:text-black"
-        )
-      );
+      styles.push(cn("text-white bg-slate-500", "active:bg-slate-600", "hover:bg-slate-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -90,9 +76,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "gray") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn("text-white bg-gray-500", "active:bg-gray-600", "hover:bg-gray-400", "dark:text-black")
-      );
+      styles.push(cn("text-white bg-gray-500", "active:bg-gray-600", "hover:bg-gray-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -122,9 +106,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "red") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn("text-white bg-red-500", "active:bg-red-600", "hover:bg-red-400", "dark:text-black")
-      );
+      styles.push(cn("text-white bg-red-500", "active:bg-red-600", "hover:bg-red-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -154,14 +136,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "orange") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn(
-          "text-white bg-orange-500",
-          "active:bg-orange-600",
-          "hover:bg-orange-400",
-          "dark:text-black"
-        )
-      );
+      styles.push(cn("text-white bg-orange-500", "active:bg-orange-600", "hover:bg-orange-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -191,14 +166,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "yellow") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn(
-          "text-white bg-yellow-500",
-          "active:bg-yellow-600",
-          "hover:bg-yellow-400",
-          "dark:text-black"
-        )
-      );
+      styles.push(cn("text-white bg-yellow-500", "active:bg-yellow-600", "hover:bg-yellow-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -228,9 +196,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "lime") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn("text-white bg-lime-500", "active:bg-lime-600", "hover:bg-lime-400", "dark:text-black")
-      );
+      styles.push(cn("text-white bg-lime-500", "active:bg-lime-600", "hover:bg-lime-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -260,14 +226,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "green") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn(
-          "text-white bg-green-500",
-          "active:bg-green-600",
-          "hover:bg-green-400",
-          "dark:text-black"
-        )
-      );
+      styles.push(cn("text-white bg-green-500", "active:bg-green-600", "hover:bg-green-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -297,14 +256,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "emerald") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn(
-          "text-white bg-emerald-500",
-          "active:bg-emerald-600",
-          "hover:bg-emerald-400",
-          "dark:text-black"
-        )
-      );
+      styles.push(cn("text-white bg-emerald-500", "active:bg-emerald-600", "hover:bg-emerald-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -334,9 +286,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "teal") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn("text-white bg-teal-500", "active:bg-teal-600", "hover:bg-teal-400", "dark:text-black")
-      );
+      styles.push(cn("text-white bg-teal-500", "active:bg-teal-600", "hover:bg-teal-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -366,9 +316,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "cyan") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn("text-white bg-cyan-500", "active:bg-cyan-600", "hover:bg-cyan-400", "dark:text-black")
-      );
+      styles.push(cn("text-white bg-cyan-500", "active:bg-cyan-600", "hover:bg-cyan-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -398,9 +346,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "blue") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn("text-white bg-blue-500", "active:bg-blue-600", "hover:bg-blue-400", "dark:text-black")
-      );
+      styles.push(cn("text-white bg-blue-500", "active:bg-blue-600", "hover:bg-blue-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -430,14 +376,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "violet") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn(
-          "text-white bg-violet-500",
-          "active:bg-violet-600",
-          "hover:bg-violet-400",
-          "dark:text-black"
-        )
-      );
+      styles.push(cn("text-white bg-violet-500", "active:bg-violet-600", "hover:bg-violet-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -467,14 +406,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "purple") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn(
-          "text-white bg-purple-500",
-          "active:bg-purple-600",
-          "hover:bg-purple-400",
-          "dark:text-black"
-        )
-      );
+      styles.push(cn("text-white bg-purple-500", "active:bg-purple-600", "hover:bg-purple-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -504,9 +436,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "pink") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn("text-white bg-pink-500", "active:bg-pink-600", "hover:bg-pink-400", "dark:text-black")
-      );
+      styles.push(cn("text-white bg-pink-500", "active:bg-pink-600", "hover:bg-pink-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(
@@ -536,9 +466,7 @@ export const buttonStyles = ({
   }
   if (buttonColor === "rose") {
     if (buttonStyle === "solid") {
-      styles.push(
-        cn("text-white bg-rose-500", "active:bg-rose-600", "hover:bg-rose-400", "dark:text-black")
-      );
+      styles.push(cn("text-white bg-rose-500", "active:bg-rose-600", "hover:bg-rose-400", "dark:text-black"));
     } else if (buttonStyle === "outline") {
       styles.push(
         cn(

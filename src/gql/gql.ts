@@ -15,7 +15,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "mutation createAccount($input: CreateAccountInput!) {\n  createAccount(input: $input) {\n    ok\n    error\n  }\n}": types.CreateAccountDocument,
-    "mutation signIn($input: SignInInput!) {\n  signIn(input: $input) {\n    ok\n    token\n    error\n  }\n}": types.SignInDocument,
+    "mutation requestRefreshToken($input: RequestRefreshTokenInput!) {\n  requestRefreshToken(input: $input) {\n    ok\n    error\n    accessToken\n    refreshToken\n  }\n}": types.RequestRefreshTokenDocument,
+    "mutation signIn($input: SignInInput!) {\n  signIn(input: $input) {\n    ok\n    error\n    accessToken\n    refreshToken\n  }\n}": types.SignInDocument,
 };
 
 /**
@@ -39,7 +40,11 @@ export function graphql(source: "mutation createAccount($input: CreateAccountInp
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation signIn($input: SignInInput!) {\n  signIn(input: $input) {\n    ok\n    token\n    error\n  }\n}"): (typeof documents)["mutation signIn($input: SignInInput!) {\n  signIn(input: $input) {\n    ok\n    token\n    error\n  }\n}"];
+export function graphql(source: "mutation requestRefreshToken($input: RequestRefreshTokenInput!) {\n  requestRefreshToken(input: $input) {\n    ok\n    error\n    accessToken\n    refreshToken\n  }\n}"): (typeof documents)["mutation requestRefreshToken($input: RequestRefreshTokenInput!) {\n  requestRefreshToken(input: $input) {\n    ok\n    error\n    accessToken\n    refreshToken\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation signIn($input: SignInInput!) {\n  signIn(input: $input) {\n    ok\n    error\n    accessToken\n    refreshToken\n  }\n}"): (typeof documents)["mutation signIn($input: SignInInput!) {\n  signIn(input: $input) {\n    ok\n    error\n    accessToken\n    refreshToken\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

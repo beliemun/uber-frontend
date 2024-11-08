@@ -1,5 +1,5 @@
 import { ButtonStyleType } from "components/atoms/button/types";
-import { ColorType } from "lib/colors";
+import { ColorType } from "common/colors";
 import { ReactNode } from "react";
 
 export type AlertSize = 480 | 640 | 720 | 1024;

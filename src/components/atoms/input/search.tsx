@@ -1,4 +1,4 @@
-import { cn } from "lib/utils";
+import { cn } from "common/utils";
 import { InputRef } from "antd";
 import SearchAtnd from "antd/es/input/Search";
 import { SearchProps as SearchAntdProps } from "antd/lib/input";
@@ -11,10 +11,7 @@ export interface SearchProps extends SearchAntdProps {
   error?: string | undefined;
 }
 
-const Search = (
-  { className, size = "middle", error, ...rest }: SearchProps,
-  ref: ForwardedRef<InputRef>
-) => {
+const Search = ({ className, size = "middle", error, ...rest }: SearchProps, ref: ForwardedRef<InputRef>) => {
   return (
     <ConfigProvider>
       <SearchAtnd ref={ref} className={cn(size, className)} size={size} {...rest} />

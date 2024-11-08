@@ -1,4 +1,4 @@
-import { cn } from "lib/utils";
+import { cn } from "common/utils";
 import { Radio as RadioAntd, RadioGroupProps as RadioGroupAntdProps } from "antd";
 import { ForwardedRef, forwardRef } from "react";
 

@@ -4,7 +4,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { ButtonProps } from "./types";
 import { motion, Variants, useAnimation, MotionProps } from "framer-motion";
 import { Tooltip } from "antd";
-import { cn } from "lib/utils";
+import { cn } from "common/utils";
 
 const btnVariants: Variants = {
   hidden: { scale: 0.9, opacity: 0 },

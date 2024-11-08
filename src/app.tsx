@@ -1,7 +1,7 @@
-import "common/tailwind/output.css";
+import "lib/tailwind/output.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Alert } from "components/molecules";
-import { PublicRouteGuard, publicRoutes } from "routes";
+import { PrivateRouteGuard, privateRoutes, PublicRouteGuard, publicRoutes } from "routes";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -11,6 +11,10 @@ const App = () => {
         {
           element: <PublicRouteGuard />,
           children: publicRoutes,
+        },
+        {
+          element: <PrivateRouteGuard />,
+          children: privateRoutes,
         },
       ],
     },

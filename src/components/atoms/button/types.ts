@@ -1,4 +1,4 @@
-import { ColorType } from "lib/colors";
+import { ColorType } from "common/colors";
 import { TooltipPlacement } from "antd/es/tooltip";
 import { ButtonHTMLAttributes, CSSProperties, ReactNode } from "react";
 

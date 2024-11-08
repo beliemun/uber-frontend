@@ -1,4 +1,4 @@
-import { cn } from "lib/utils";
+import { cn } from "common/utils";
 import { Input as InputAntd, InputProps as InputAntdProps, InputRef } from "antd";
 import { ForwardedRef, forwardRef, ForwardRefExoticComponent, RefAttributes } from "react";
 import { ConfigProvider } from "./config-provider";
@@ -13,18 +13,14 @@ export interface InputProps extends InputAntdProps {
   error?: string | undefined;
 }
 
-export interface InputComponentProps
-  extends ForwardRefExoticComponent<InputProps & RefAttributes<InputRef>> {
+export interface InputComponentProps extends ForwardRefExoticComponent<InputProps & RefAttributes<InputRef>> {
   Search: ForwardRefExoticComponent<SearchProps & RefAttributes<InputRef>>;
   Password: ForwardRefExoticComponent<PasswordProps & RefAttributes<InputRef>>;
   TextArea: ForwardRefExoticComponent<TextAreaProps & RefAttributes<InputRef>>;
   OTP: ForwardRefExoticComponent<OTPProps & RefAttributes<OTPRef>>;
 }
 
-const Input = (
-  { style, className, error, autoComplete, ...rest }: InputProps,
-  ref: ForwardedRef<InputRef>
-) => {
+const Input = ({ style, className, error, autoComplete, ...rest }: InputProps, ref: ForwardedRef<InputRef>) => {
   return (
     <ConfigProvider>
       <InputAntd ref={ref} style={{ ...style }} className={cn(className)} {...rest} />

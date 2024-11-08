@@ -1,4 +1,4 @@
-import { ColorType } from "lib/colors";
+import { ColorType } from "common/colors";
 import { TitleColor } from "./types";
 
 export const titleColorStyles = ({ color }: { color: TitleColor | ColorType }) => {

@@ -8,19 +8,22 @@ import {
   CreateAccountMutationVariables,
   UserRole,
 } from "gql/graphql";
-import { cn } from "lib/utils";
+import { cn } from "common/utils";
 import { Controller, useForm } from "react-hook-form";
 import { useMutation } from "urql";
 import { roleOptions } from "./data";
 import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 
 const CreateAccountPage = () => {
   const [messageApi, contextHolder] = Message.useMessage();
+  const navigate = useNavigate();
 
   const {
     control,
     handleSubmit,
     formState: { errors, isValid },
+    getValues,
   } = useForm<CreateAccountInput>({
     mode: "onChange",
     defaultValues: {
@@ -30,10 +33,9 @@ const CreateAccountPage = () => {
       role: UserRole.Client,
     },
   });
-  const [{ fetching }, createAccountMutation] = useMutation<
-    CreateAccountMutation,
-    CreateAccountMutationVariables
-  >(CreateAccountDocument);
+  const [{ fetching }, createAccountMutation] = useMutation<CreateAccountMutation, CreateAccountMutationVariables>(
+    CreateAccountDocument
+  );
 
   const onSubmit = async (input: CreateAccountInput) => {
     if (fetching) {
@@ -48,10 +50,12 @@ const CreateAccountPage = () => {
         messageApi.open({ type: "error", content: error });
       }
       if (ok) {
-        console.log("ok");
+        setTimeout(() => navigate("/sign-in", { state: { email: getValues("email") } }), 500);
       }
     } catch {}
   };
+
+  const handleNavigate = () => navigate("/sign-in");
 
   return (
     <article className="flex flex-col justify-center items-center w-full h-screen">
@@ -134,11 +138,7 @@ const CreateAccountPage = () => {
               control={control}
               rules={{ required: "This field is required." }}
               render={({ field }) => (
-                <Radio.Group
-                  {...field}
-                  className={cn("felx felx-col gap-2")}
-                  options={roleOptions}
-                />
+                <Radio.Group {...field} className={cn("felx felx-col gap-2")} options={roleOptions} />
               )}
             />
           </FormItem>
@@ -147,6 +147,9 @@ const CreateAccountPage = () => {
           </Button>
         </Form>
       </Card>
+      <Button buttonStyle="ghost" className="mt-4" onClick={handleNavigate}>
+        Sign In
+      </Button>
     </article>
   );
 };
