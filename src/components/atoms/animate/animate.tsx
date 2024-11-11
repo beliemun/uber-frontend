@@ -13,7 +13,7 @@ const Animate = ({ style, className, name, type = "show-up", layoutId, transitio
     <AnimatePresence>
       <motion.div
         style={{ ...style }}
-        className={cn("col-center size-full", className)}
+        className={cn("flex flex-col justify-center items-centersize-full", className)}
         key={name}
         variants={animations[type]}
         initial={"initial"}

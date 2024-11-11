@@ -35,7 +35,7 @@ const PrivateRouteGuard = () => {
         }
       }
     }
-  }, [fetching, accessToken, getRefreshToken, requestRefreshTokenMutation, setRefreshToken]);
+  }, [fetching, accessToken, getRefreshToken, requestRefreshTokenMutation, signIn, setRefreshToken]);
 
   useEffect(() => {
     requestTokens();

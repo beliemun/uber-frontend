@@ -1,7 +1,7 @@
+import { HomePage } from "pages/private";
 import { CreateAccountPage, SignInPage } from "pages/public";
 import { PATH } from "./constants";
 import { Route } from "./types";
-import { HomePage } from "pages/private";
 
 export const publicRoutes: Route[] = [
   { path: PATH.SIGN_IN, element: <SignInPage /> },

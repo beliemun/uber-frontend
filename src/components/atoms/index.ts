@@ -2,6 +2,7 @@ export * from "./animate";
 export * from "./button";
 export * from "./card";
 export * from "./input";
+export * from "./loading";
 export * from "./message";
 export * from "./radio";
 export * from "./skeleton";
