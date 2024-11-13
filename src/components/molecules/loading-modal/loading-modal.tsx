@@ -18,8 +18,6 @@ export const LoadingModal = ({ loading = true, loadingMessage = undefined, onClo
     }
   }, [loading, onClose]);
 
-  console.log("visible", visible, loading);
-
   return (
     <AnimatePresence>
       {visible ? (

@@ -3,7 +3,7 @@ import { Button, Card, Input, Message, Title } from "components/atoms";
 import { Form, FormItem } from "components/molecules";
 import { SignInDocument, SignInInput, SignInMutation, SignInMutationVariables } from "gql/graphql";
 import { useRefreshToken } from "hooks";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Controller, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -16,7 +16,6 @@ const SignInPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { setRefreshToken } = useRefreshToken();
-  const [isLoading, setIsLoading] = useState(false);
 
   const {
     control,
@@ -36,7 +35,6 @@ const SignInPage = () => {
       return;
     }
     try {
-      setIsLoading(true);
       const { data } = await signInMutation({ input });
       const {
         signIn: { ok, error, accessToken, refreshToken },
@@ -49,10 +47,7 @@ const SignInPage = () => {
         setRefreshToken(refreshToken);
         navigate("/");
       }
-    } catch {
-    } finally {
-      setIsLoading(false);
-    }
+    } catch {}
   };
 
   const handleNavigate = () => navigate("/create-account");
@@ -67,17 +62,12 @@ const SignInPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("isLoading:", isLoading);
-
   return (
     <article className="flex flex-col justify-center items-center w-full h-screen">
       {contextHolder}
       <Helmet>
         <title>Sign In</title>
       </Helmet>
-      <div className="absolute top-10 left-10 z-50">
-        <Button onClick={() => setIsLoading((prev) => !prev)}>Button</Button>
-      </div>
       <Card>
         <Title className="w-full text-center pb-2">Sign In</Title>
         <Form onSubmit={handleSubmit(onSubmit)}>
